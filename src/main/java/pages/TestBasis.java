@@ -76,7 +76,6 @@ public class TestBasis {
         driver.get(env);
         homePage = new HomePage(driver, wait, actions);
         homePageSteps = new HomePageSteps(driver, wait, actions);
-        System.out.println();
     }
 
     @AfterMethod
