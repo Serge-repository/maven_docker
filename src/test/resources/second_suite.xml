@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Advanced Selenium" parallel="tests">
+    <parameter name="env" value="http://webdriveruniversity.com/index.html"/>
+    <test name="Different techniques">
+        <classes>
+            <class name="tests.AdvancedSelenium"/>
+        </classes>
+    </test>
+</suite>
+

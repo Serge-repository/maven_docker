@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="General" parallel="classes">
+    <test name="Home page tests">
+        <parameter name="env" value="http://automationpractice.com/index.php"/>
+        <classes>
+            <class name="tests.HomePageTests"/>
+        </classes>
+    </test>
+    <test name="Different techniques">
+        <parameter name="env" value="http://webdriveruniversity.com/index.html"/>
+        <classes>
+            <class name="tests.AdvancedSelenium"/>
+        </classes>
+    </test>
+</suite>

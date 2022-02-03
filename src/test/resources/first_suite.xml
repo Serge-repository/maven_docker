@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Home" parallel="tests">
+    <parameter name="env" value="http://automationpractice.com/index.php"/>
+    <test name="Home page tests">
+        <classes>
+            <class name="tests.HomePageTests"/>
+        </classes>
+    </test>
+</suite>
+
