@@ -24,3 +24,15 @@ services:
       - SE_EVENT_BUS_HOST=hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+# Starting already created docker image when running tests
+  test-runner:
+    image: serge11elzar/maven_docker
+    depends_on:
+      - chrome
+      - firefox
+    environment:
+      - browser=CHROME
+      - HUB_HOST=hub
+      - SUITE=general_suite.xml
+    volumes:
+      - .\target\allure-results:/usr/share/maven_docker/target/allure-results

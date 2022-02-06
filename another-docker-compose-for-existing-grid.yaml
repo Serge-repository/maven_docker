@@ -1,0 +1,13 @@
+#version: "3"
+#services:
+#  test-runner:
+#    image: serge11elzar/maven_docker
+#    depends_on:
+#      - chrome
+#      - firefox
+#    environment:
+#      - browser=CHROME
+#      - HUB_HOST=10.2.3.0
+#      - SUITE=general_suite.xml
+#    volumes:
+#      - .\target\allure-results:/usr/share/maven_docker/target/allure-results
