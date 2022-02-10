@@ -20,5 +20,5 @@ ADD healthcheck.sh healthcheck.sh
 # Always use ":" because all containers will be running in alpine
 # ENTRYPOINT java -cp MavenDocker.jar:MavenDocker-tests.jar:libs/* -Dbrowser=$browser -DHUB_HOST=$HUB_HOST org.testng.TestNG $SUITE
 
-## To run with healthcheck using docker container and just docker-compose up command
+## To run with healthcheck (only if run from simple docker-compose up command)
 ENTRYPOINT sh healthcheck.sh
