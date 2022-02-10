@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.GeneralPage;
 import pages.HomePage;
-import pages.TestBasis;
 
 public class HomePageSteps extends GeneralPage {
     HomePage homePage = new HomePage(driver, wait, actions);

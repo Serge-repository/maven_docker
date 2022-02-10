@@ -25,7 +25,7 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
 # Starting already created docker image when running tests
-  test-runner:
+  regression-run:
     image: serge11elzar/maven_docker
     depends_on:
       - chrome
@@ -36,3 +36,16 @@ services:
       - SUITE=general_suite.xml
     volumes:
       - .\target\allure-results:/usr/share/maven_docker/target/allure-results
+# Adding parameters for ANOTHER SUITE run
+  smoke-run:
+    image: serge11elzar/maven_docker
+    depends_on:
+      - chrome
+      - firefox
+    environment:
+      - browser=FIREFOX
+      - HUB_HOST=hub
+      - SUITE=second_suite.xml
+    volumes:
+      - .\target\smoke-results:/usr/share/maven_docker/test-output
+#      - .\target\allure-results:/usr/share/maven_docker/target/allure-results
