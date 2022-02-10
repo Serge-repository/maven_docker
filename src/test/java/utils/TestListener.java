@@ -31,7 +31,7 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.println("I am in onTestFailure method " + getTestMethodName(iTestResult) + " failed");
+        System.out.println("Method " + getTestMethodName(iTestResult) + " failed");
         Object testClass = iTestResult.getInstance();
         WebDriver driver = ((TestBasis)testClass).getDriver();
         if (driver != null) {
