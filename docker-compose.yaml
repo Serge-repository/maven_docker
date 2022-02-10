@@ -31,7 +31,7 @@ services:
       - chrome
       - firefox
     environment:
-      - browser=CHROME
+      - browser=firefox
       - HUB_HOST=hub
       - SUITE=general_suite.xml
     volumes:
@@ -43,7 +43,7 @@ services:
       - chrome
       - firefox
     environment:
-      - browser=FIREFOX
+      - browser=chrome
       - HUB_HOST=hub
       - SUITE=second_suite.xml
     volumes:

@@ -66,6 +66,7 @@ public class TestBasis {
                 case FIREFOX:
                     WebDriverManager.firefoxdriver().setup();
                     this.driver = new FirefoxDriver((FirefoxOptions) capabilities);
+                    break;
             }
         }
 
