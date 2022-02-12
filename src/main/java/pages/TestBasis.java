@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -34,8 +35,8 @@ public class TestBasis {
 
     private final Browser browser = Browser.getBrowser();
 
-    String host = "http://localhost:4444/wd/hub";  // if null -tests would be started locally
-//    String host = null;
+//    String host = "http://localhost:4444/wd/hub";  // if null -tests would be started locally
+    String host = null;
 
     @Parameters({"env"})
     @BeforeMethod
@@ -55,7 +56,8 @@ public class TestBasis {
             String testName = testContext.getCurrentXmlTest().getName();
             capabilities.setCapability("name", testName);
             this.driver = new RemoteWebDriver(new URL(host), capabilities);
-
+// FOR FILE UPLOADS
+            ((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
         } else {
             capabilities = initCaps();
             switch (browser) {
@@ -82,17 +84,6 @@ public class TestBasis {
     @AfterMethod
     protected void actionsAfterMethod() {
         driver.quit();
-    }
-
-    private MutableCapabilities initCaps() {
-        switch (browser) {
-            case CHROME:
-                return getChromeCapabilities();
-            case FIREFOX:
-                return getFirefoxCapabilities();
-            default:
-                throw new RuntimeException(browser + " browser is not expected");
-        }
     }
 
     public WebDriver getDriver() {
@@ -123,5 +114,16 @@ public class TestBasis {
         firefoxProfile.setPreference("intl.accept_languages", "en");
         firefoxOptions.setProfile(firefoxProfile);
         return firefoxOptions;
+    }
+
+    private MutableCapabilities initCaps() {
+        switch (browser) {
+            case CHROME:
+                return getChromeCapabilities();
+            case FIREFOX:
+                return getFirefoxCapabilities();
+            default:
+                throw new RuntimeException(browser + " browser is not expected");
+        }
     }
 }

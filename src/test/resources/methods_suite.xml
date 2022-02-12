@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="agile_suite" parallel="tests">
+    <parameter name="env" value="http://automationpractice.com/index.php"/>
+    <test name="Advanced selenium methods">
+        <classes>
+            <class name="tests.AdvancedSelenium">
+                <methods>
+                    <include name="actionsPage"/>
+                    <include name="modalsPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+

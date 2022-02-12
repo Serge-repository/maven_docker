@@ -18,7 +18,6 @@ public class HomePageTests extends TestBasis {
     @Story("Advertising")
     @Test
     public void advertiseRound() {
-//        assertTrue(homePage.scrollAdvertiseLeftAndRight().isDisplayed(), "checking that image was scrolled right");
         assertTrue(homePageSteps.advertiseTest().isDisplayed(), "checking that image was scrolled right");
     }
 
@@ -27,8 +26,6 @@ public class HomePageTests extends TestBasis {
     @Story("Cart")
     @Test
     public void useActions() {
-//        homePage.getItemsListFragment().addToCartUsingAction(1);
-//        assertEquals(homePage.getPageTopFragment().checkItemsQuantityInCart(), "1");
         homePageSteps.addItemToCart(1);
         assertEquals(homePageSteps.itemsQuantityInCart(), "1", "check if quantity in cart is correct");
     }
