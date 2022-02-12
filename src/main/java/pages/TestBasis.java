@@ -30,7 +30,6 @@ public class TestBasis {
     public WebDriverWait wait;
     public Actions actions;
 
-    public HomePage homePage;
     public HomePageSteps homePageSteps;
 
     private final Browser browser = Browser.getBrowser();
@@ -77,7 +76,6 @@ public class TestBasis {
         actions = new Actions(driver);
 //        driver.get("http://webdriveruniversity.com/index.html");
         driver.get(env);
-        homePage = new HomePage(driver, wait, actions);
         homePageSteps = new HomePageSteps(driver, wait, actions);
     }
 
