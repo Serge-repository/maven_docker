@@ -8,9 +8,6 @@ import org.testng.annotations.Test;
 import pages.TestBasis;
 import utils.TestListener;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -90,30 +87,19 @@ public class AdvancedSelenium extends TestBasis {
     @Description("Test file upload")
     @Story("Features")
     @Test
-    public void fileUploadPage() throws AWTException {
+    public void fileUploadPage() {
         driver.findElement(By.xpath("//h1[contains(text(),'FILE UPLOAD')]")).click();
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         waitForPageToBeFullyLoaded();
 
-        actions.moveToElement(driver.findElement(By.cssSelector("input#myFile")), -70, 0).click().build().perform();
-
         String fileSeparator = FileSystems.getDefault().getSeparator();
         Path path = Paths.get(System.getProperty("user.dir"));
         String pathAsString = path.toString();
-        StringSelection filePath = new StringSelection(pathAsString + fileSeparator + "src" + fileSeparator + "test"
-                + fileSeparator + "resources" + fileSeparator + "images" + fileSeparator + "orange.jpg");
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(filePath, null);
-        Robot robot = new Robot();
-        robot.setAutoDelay(1000);
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.setAutoDelay(1000);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        String filePath = pathAsString + fileSeparator + "src" + fileSeparator + "test"
+                + fileSeparator + "resources" + fileSeparator + "images" + fileSeparator + "orange.jpg";
 
+        driver.findElement(By.cssSelector("input#myFile")).sendKeys(filePath);
         driver.findElement(By.id("submit-button")).click();
     }
 }

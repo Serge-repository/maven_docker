@@ -28,6 +28,7 @@ public class TestBasis extends DriverInitializer {
         homePageSteps = new HomePageSteps(driver, wait, actions);
     }
 
+// Uncomment for local run
 //    @BeforeMethod
 //    protected void actionsBeforeMethod() throws MalformedURLException {
 //        startDriver(browser, null, host);
