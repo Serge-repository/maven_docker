@@ -15,22 +15,21 @@ import java.net.MalformedURLException;
 public class TestBasis extends DriverInitializer {
 
     public HomePageSteps homePageSteps;
+    private String host;
 
     private final Browser browser = Browser.getBrowser();
 
-    String host = "http://localhost:4444/wd/hub";  // if null -tests would be started locally
-//    String host = null;
-
-    @Parameters({"env"})
+    @Parameters({"env"})  // Uncomment for selenium grid run
     @BeforeMethod
     protected void actionsBeforeMethod(String env) throws MalformedURLException {
+        host = "http://localhost:4444/wd/hub";
         startDriver(browser, env, host);
         homePageSteps = new HomePageSteps(driver, wait, actions);
     }
 
-// Uncomment for local run
-//    @BeforeMethod
+//    @BeforeMethod    // Uncomment for local run
 //    protected void actionsBeforeMethod() throws MalformedURLException {
+//        host = null;
 //        startDriver(browser, null, host);
 //        homePageSteps = new HomePageSteps(driver, wait, actions);
 //    }

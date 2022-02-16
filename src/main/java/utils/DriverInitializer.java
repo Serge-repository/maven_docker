@@ -56,7 +56,7 @@ public class DriverInitializer {
         wait = new WebDriverWait(driver, 5);
         actions = new Actions(driver);
 
-        if (host == null){
+        if (host != null){
             driver.get(env);
         } else {
             driver.get("http://webdriveruniversity.com/index.html");
