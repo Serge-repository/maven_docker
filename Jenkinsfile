@@ -12,7 +12,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 //sh instead bat for MAC
-                bat "docker build -t='serge11elzar/maven_docker' ."
+                bat "docker build -t=serge11elzar/maven_docker ."
             }
         }
         stage('Push Image') {
