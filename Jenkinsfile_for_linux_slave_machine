@@ -22,7 +22,7 @@ pipeline {
         stage('Push Image') {
             steps {
                 script {
-                //"dockerhub" - credentials ID name from Jenkins
+                //"dockerhub" - credentials ID name already set up Jenkins
 			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 			        //${BUILD_NUMBER} defines build number in Jenkins
 			        	app.push("${BUILD_NUMBER}")
