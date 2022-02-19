@@ -1,4 +1,5 @@
 // Jenkinsfile version to be used on Windows or MAC as a slave
+// Remember to rename it to "Jenkinsfile" before using
 pipeline {
     // master executor should be set to 0
     agent any
