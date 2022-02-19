@@ -1,7 +1,6 @@
 // Jenkinsfile version to be used on Windows or MAC as a slave
-// Remember to rename it to "Jenkinsfile" before using
 pipeline {
-    // master executor should be set to 0
+    // master executor should be set to 0 in Jenkins
     agent any
     stages {
         stage('Build Jar') {
@@ -18,7 +17,6 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-            //pass your dockerhub username and password
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh instead bat for MAC
 			        bat "docker login --username=${user} --password=${pass}"
