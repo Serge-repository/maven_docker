@@ -13,8 +13,13 @@ ADD src/test/resources/first_suite.xml first_suite.xml
 ADD src/test/resources/general_suite.xml general_suite.xml
 ADD src/test/resources/images/orange.jpg src/test/resources/images/orange.jpg
 
-# Add health check script (only if run from simple docker-compose up command)
-ADD healthcheck.sh healthcheck.sh
+## Add health check script (only if run from simple docker-compose up command)
+# Use "ADD healthcheck.sh healthcheck.sh" for running and updating docker image in local
+# ADD healthcheck.sh healthcheck.sh
+
+# Use "RUN wget https://drive.google.com/uc?export=download&id=1KQ3CqjdUXzmzzqfSzqYsrumAQeDUwu6D&confirm=t"
+# for running test suites
+RUN wget https://drive.google.com/uc?export=download&id=1KQ3CqjdUXzmzzqfSzqYsrumAQeDUwu6D&confirm=t
 
 ## To run without healthcheck using ip or container
 # Always use ":" because all containers will be running in alpine
