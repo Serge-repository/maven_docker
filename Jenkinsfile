@@ -1,7 +1,9 @@
 // Jenkinsfile version to be used on Windows or MAC as a slave
 pipeline {
     // master executor should be set to 0 in Jenkins
-    agent any
+    agent {
+        node("DOCKER1")
+    }
     stages {
         stage('Build Jar') {
             steps {
