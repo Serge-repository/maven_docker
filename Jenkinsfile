@@ -1,10 +1,7 @@
 // Jenkinsfile version to be used on Windows or MAC as a slave
 pipeline {
     // master executor should be set to 0 in Jenkins
-//agent any
-    agent {
-        node("DOCKER1")
-    }
+    agent any
     stages {
         stage('Build Jar') {
             steps {
@@ -24,27 +21,8 @@ pipeline {
                     //sh instead bat for MAC
 			        bat "docker login --username=${user} --password=${pass}"
 			        bat "docker push serge11elzar/maven_docker:latest"
-			    }                           
+			    }
             }
-        }
-
-        stage('Start Grid') {
-             steps {
-                 bat "docker-compose up -d hub --scale chrome=2 --scale firefox=2"
-             }
-        }
-        stage('Run Test') {
-             steps {
-                 bat "docker-compose up first-suite-chrome second-suite-firefox"
-             }
-        }
-    }
-    post{
-        always{
-        	archiveArtifacts artifacts: 'target/**'
-//         		bat "docker-compose down"
-        		bat "docker-compose stop"
-        		bat "docker-compose rm --force"
         }
     }
 }
