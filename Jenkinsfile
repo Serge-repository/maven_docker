@@ -42,18 +42,7 @@ pipeline {
     post{
         always{
         	archiveArtifacts artifacts: 'target/**'
-
-        	publishHTML (target: [
-        	    allowMissing: true,
-        	    alwaysLinkToLastBuild: true,
-        	    keepAll: true,
-        	    reportDir: 'target/report/',
-        	    reportFiles: 'index.html',
-        	    reportName: "Test Report"
-        	])
-
 //         		bat "docker-compose down"
-
         		bat "docker-compose stop"
         		bat "docker-compose rm --force"
         }
