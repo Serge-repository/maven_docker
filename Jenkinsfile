@@ -28,14 +28,14 @@ pipeline {
             }
         }
 
-//         stage('Start Grid') {
-//              steps {
-//                  bat "docker-compose up -d hub chrome firefox"
-//              }
-//         }
+        stage('Start Grid') {
+             steps {
+                 bat "docker-compose up -d hub --scale chrome=2 --scale firefox=2"
+             }
+        }
         stage('Run Test') {
              steps {
-                 bat "docker-compose up --scale chrome=2 --scale firefox=2 first-suite-chrome second-suite-firefox"
+                 bat "docker-compose up first-suite-chrome second-suite-firefox"
              }
         }
     }
