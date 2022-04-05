@@ -24,5 +24,22 @@ pipeline {
 			    }                           
             }
         }
+
+        stage('Start Grid') {
+             steps {
+                 bat "docker-compose up -d hub chrome firefox"
+             }
+        }
+        stage('Run Test') {
+             steps {
+                 bat "docker-compose up first-suite-chrome second-suite-firefox"
+             }
+        }
+    }
+    post{
+        always{
+        	archiveArtifacts artifacts: 'target/**'
+        		bat "docker-compose down"
+        }
     }
 }
