@@ -14,7 +14,7 @@ ADD src/test/resources/general_suite.xml general_suite.xml
 ADD src/test/resources/images/orange.jpg src/test/resources/images/orange.jpg
 
 ## Add health check script (only if run from simple docker-compose up command)
-ADD healthcheck.sh healthcheck.sh
+# ADD healthcheck.sh healthcheck.sh
 
 ## To run without healthcheck using ip or container
 # Always use ":" because all containers will be running in alpine
