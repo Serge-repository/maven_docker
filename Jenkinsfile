@@ -2,6 +2,7 @@
 pipeline {
     // master executor should be set to 0 in Jenkins
     agent {
+        //add this tag for node in Jenkins
         node("DOCKER1")
     }
     stages {
