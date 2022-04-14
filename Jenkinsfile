@@ -42,23 +42,10 @@ pipeline {
                 bat "docker-compose up first-suite-chrome second-suite-firefox"
             }
         }
-            stage('Allure report') {
-                steps {
-                        script {
-                            allure([
-                                    includeProperties: false,
-                                    jdk: '',
-                                    properties: [],
-                                    reportBuildPolicy: 'ALWAYS',
-                                    results: [[path: 'target/allure-results']]
-                            ])
-                        }
-                    }
-                }
     }
     post{
 		always{
-// 			archiveArtifacts artifacts: 'target/**'
+			archiveArtifacts artifacts: 'target/**'
 			bat "docker-compose stop"
 			bat "docker-compose rm --force"
 		}
