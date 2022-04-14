@@ -27,5 +27,31 @@ pipeline {
 			    }
             }
         }
+
+        stage('Pull latest image') {
+            steps {
+                bat "docker pull serge11elzar/maven_docker"
+            }
+        }
+        stage('Start Grid') {
+            steps {
+                bat "docker-compose up -d --scale chrome=2 --scale firefox=2 hub chrome firefox"
+            }
+        }
+        stage('Run Test') {
+            steps {
+                bat "docker-compose up first-suite-chrome second-suite-firefox"
+            }
+        }
+
     }
+
+    post{
+		always{
+			archiveArtifacts artifacts: 'target/**'
+			bat "docker-compose stop"
+			bat "docker-compose rm --force"
+		}
+	}
+
 }

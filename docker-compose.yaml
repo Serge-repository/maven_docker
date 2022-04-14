@@ -2,6 +2,7 @@ version: "3"
 services:
   hub: 
     image: selenium/hub
+## May be commented to run with grid
     ports: 
       - "4442:4442"
       - "4443:4443"
@@ -30,7 +31,7 @@ services:
 ## Volume mapping for file DOWNLOADS
     volumes:
       - .\target\downloads:/home/seluser/Downloads
-### Starting already created docker image when running tests
+### Adding FIRST SUITE run
   regression-firefox:
     image: serge11elzar/maven_docker
     depends_on:
@@ -54,7 +55,7 @@ services:
       - SUITE=first_suite.xml
     volumes:
       - .\target\allure-results:/usr/share/maven_docker/target/allure-results
-#      - .\target\first-suite-results:/usr/share/maven_docker/test-output
+      - .\target\first-suite-results:/usr/share/maven_docker/test-output
 ### Adding ANOTHER SUITE run
   second-suite-firefox:
     image: serge11elzar/maven_docker
@@ -67,4 +68,4 @@ services:
       - SUITE=second_suite.xml
     volumes:
       - .\target\allure-results:/usr/share/maven_docker/target/allure-results
-#      - .\target\second-suite-results:/usr/share/maven_docker/test-output
+      - .\target\second-suite-results:/usr/share/maven_docker/test-output
