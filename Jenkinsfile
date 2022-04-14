@@ -48,7 +48,16 @@ pipeline {
 
     post{
 		always{
-			archiveArtifacts artifacts: 'target/**'
+// 			archiveArtifacts artifacts: 'target/**'
+
+            allure([
+                includeProperties: false,
+                jdk: '',
+                properties: [],
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'target/allure-results']]
+            ])
+
 			bat "docker-compose stop"
 			bat "docker-compose rm --force"
 		}
