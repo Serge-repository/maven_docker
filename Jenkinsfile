@@ -50,6 +50,7 @@ pipeline {
 		always{
 // 			archiveArtifacts artifacts: 'target/**'
 
+        script{
             allure([
                 includeProperties: false,
                 jdk: '',
@@ -57,6 +58,7 @@ pipeline {
                 reportBuildPolicy: 'ALWAYS',
                 results: [[path: 'target/allure-results']]
             ])
+        }
 
 			bat "docker-compose stop"
 			bat "docker-compose rm --force"
