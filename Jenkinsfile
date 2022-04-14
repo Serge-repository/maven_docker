@@ -43,9 +43,22 @@ pipeline {
                 bat "docker-compose up first-suite-chrome second-suite-firefox"
             }
         }
+// if run without Dockerfile and docker image
 
+        //         stage('Allure report') {
+        //             steps {
+        //                 script {
+        //                     allure([
+        //                             includeProperties: false,
+        //                             jdk: '',
+        //                             properties: [],
+        //                             reportBuildPolicy: 'ALWAYS',
+        //                             results: [[path: 'target/allure-results']]
+        //                     ])
+        //                 }
+        //             }
+        //         }
     }
-
     post{
 		always{
 			archiveArtifacts artifacts: 'target/**'
