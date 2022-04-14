@@ -27,7 +27,6 @@ pipeline {
 			    }
             }
         }
-
         stage('Pull latest image') {
             steps {
                 bat "docker pull serge11elzar/maven_docker"
@@ -44,7 +43,6 @@ pipeline {
             }
         }
 // if run without Dockerfile and docker image
-
         //         stage('Allure report') {
         //             steps {
         //                 script {
@@ -66,5 +64,4 @@ pipeline {
 			bat "docker-compose rm --force"
 		}
 	}
-
 }
