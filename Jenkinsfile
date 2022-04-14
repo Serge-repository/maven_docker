@@ -59,7 +59,7 @@ pipeline {
     }
     post{
 		always{
-			archiveArtifacts artifacts: 'target/**'
+// 			archiveArtifacts artifacts: 'target/**'
 			bat "docker-compose stop"
 			bat "docker-compose rm --force"
 		}
