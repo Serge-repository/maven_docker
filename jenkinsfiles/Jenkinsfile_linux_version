@@ -1,0 +1,50 @@
+// Jenkinsfile version to be used on MAC as a slave
+pipeline {
+    // master executor should be set to 0 in Jenkins
+    agent {
+        //add this tag for node in Jenkins
+        node("test-executor")
+    }
+    stages {
+        stage('Build Jar') {
+            steps {
+                sh "mvn clean package -DskipTests"
+            }
+        }
+        stage('Build Image') {
+            steps {
+                sh "docker build -t=serge11elzar/maven_docker ."
+            }
+        }
+        stage('Push Image') {
+            steps {
+			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+			        sh "docker login --username=${user} --password=${pass}"
+			        sh "docker push serge11elzar/maven_docker:latest"
+			    }
+            }
+        }
+        stage('Pull latest image') {
+            steps {
+                sh "docker pull serge11elzar/maven_docker"
+            }
+        }
+        stage('Start Grid') {
+            steps {
+                sh "docker-compose up -d --scale chrome=2 --scale firefox=2 hub chrome firefox"
+            }
+        }
+        stage('Run Test') {
+            steps {
+                sh "docker-compose up first-suite-chrome second-suite-firefox"
+            }
+        }
+    }
+    post{
+		always{
+			archiveArtifacts artifacts: 'target/**'
+			sh "docker-compose stop"
+			sh "docker-compose rm --force"
+		}
+	}
+}
