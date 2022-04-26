@@ -13,38 +13,38 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh "docker build -t=serge11elzar/maven_docker ."
+                sh "sudo docker build -t=serge11elzar/maven_docker ."
             }
         }
         stage('Push Image') {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-			        sh "docker login --username=${user} --password=${pass}"
-			        sh "docker push serge11elzar/maven_docker:latest"
+			        sh "sudo docker login --username=${user} --password=${pass}"
+			        sh "sudo docker push serge11elzar/maven_docker:latest"
 			    }
             }
         }
         stage('Pull latest image') {
             steps {
-                sh "docker pull serge11elzar/maven_docker"
+                sh "sudo docker pull serge11elzar/maven_docker"
             }
         }
         stage('Start Grid') {
             steps {
-                sh "docker-compose up -d --scale chrome=2 --scale firefox=2 hub chrome firefox"
+                sh "sudo docker-compose up -d --scale chrome=2 --scale firefox=2 hub chrome firefox"
             }
         }
         stage('Run Test') {
             steps {
-                sh "docker-compose up first-suite-chrome second-suite-firefox"
+                sh "sudo docker-compose up first-suite-chrome second-suite-firefox"
             }
         }
     }
     post{
 		always{
 			archiveArtifacts artifacts: 'target/**'
-			sh "docker-compose stop"
-			sh "docker-compose rm --force"
+			sh "sudo docker-compose stop"
+			sh "sudo docker-compose rm --force"
 		}
 	}
 }
