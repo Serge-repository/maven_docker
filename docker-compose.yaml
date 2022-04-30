@@ -43,8 +43,8 @@ services:
 #   ports:
 #     - "5050:5050"
     volumes:
-      - .\target\allure-results:/usr/share/maven_docker/target/allure-results
-      - .\target\allure-reports:/usr/share/maven_docker/target/allure-reports
+      - .\target\allure-results:/app/allure-results
+      - .\target\allure-reports:/app/default-reports
 
 ### Adding FIRST SUITE run
   regression-firefox:
