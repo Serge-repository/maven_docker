@@ -39,10 +39,24 @@ pipeline {
                 sh "sudo docker-compose up first-suite-chrome second-suite-firefox"
             }
         }
+// allure report works correctly only if run on separately installed Jenkins, not Docker container
+        stage('Generate allure report') {
+            steps {
+                script {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']]
+                    ])
+                }
+            }
+        }
     }
     post{
 		always{
-			archiveArtifacts artifacts: 'target/**'
+//          archiveArtifacts artifacts: 'target/**'   -- if we want results as separate files
 			sh "sudo docker-compose stop"
 			sh "sudo docker-compose rm --force"
 		}

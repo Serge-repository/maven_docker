@@ -42,8 +42,8 @@ pipeline {
                 bat "docker-compose up first-suite-chrome second-suite-firefox"
             }
         }
-
-        stage('reports') {
+// allure report works correctly only if run on separately installed Jenkins, not Docker container
+        stage('Generate allure report') {
             steps {
             script {
                 allure([
@@ -59,8 +59,7 @@ pipeline {
     }
     post{
 		always{
-//          archiveArtifacts artifacts: 'target/**'
-
+//          archiveArtifacts artifacts: 'target/**'   -- if we want results as separate files
 			bat "docker-compose stop"
 			bat "docker-compose rm --force"
 		}
